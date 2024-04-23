@@ -10,12 +10,17 @@ pipeline {
                     """
                 }
             }
+            post {
+                always {
+                    archiveArtifacts artifacts: "logs_${env.BUILD_NUMBER}.log", fingerprint: true
+                }
+            }
         }
-        stage("Build docker image"){
+        stage("Test"){
             steps{
                 script {
                     sh """
-                        docker build -t test -f Dockerfile_T . > logs_${env.BUILD_NUMBER}.log 2>>&1
+                        docker build -t test -f Dockerfile_T . > logs_${env.BUILD_NUMBER}.log 2>&1
                     """
                 }
             }
@@ -26,3 +31,4 @@ pipeline {
             }
         }
     }
+}
