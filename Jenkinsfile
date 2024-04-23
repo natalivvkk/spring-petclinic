@@ -19,7 +19,6 @@ pipeline {
                     """
                 }
             }
-        }
             post {
                 always {
                     archiveArtifacts artifacts: "logs_${env.BUILD_NUMBER}.log", fingerprint: true
