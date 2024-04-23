@@ -10,6 +10,7 @@ pipeline {
                     """
                 }
             }
+        }
         stage("Build docker image"){
             steps{
                 script {
@@ -18,6 +19,7 @@ pipeline {
                     """
                 }
             }
+        }
             post {
                 always {
                     archiveArtifacts artifacts: "logs_${env.BUILD_NUMBER}.log", fingerprint: true
