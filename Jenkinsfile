@@ -6,7 +6,15 @@ pipeline {
             steps{
                 script {
                     sh """
-                        docker build -t spring-petclinic -f DockerfileBuild . > logs_${env.BUILD_NUMBER}.log 2>&1
+                        docker build -t spring-petclinic -f Dockerfile_B . > logs_${env.BUILD_NUMBER}.log 2>&1
+                    """
+                }
+            }
+        stage("Build docker image"){
+            steps{
+                script {
+                    sh """
+                        docker build -t test -f Dockerfile_T . > logs_${env.BUILD_NUMBER}.log 2>>&1
                     """
                 }
             }
@@ -17,4 +25,3 @@ pipeline {
             }
         }
     }
-}
